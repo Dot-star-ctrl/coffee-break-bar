@@ -17,115 +17,11 @@
         </div>
     </section>
 
-    <div class="relative container mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 class="sr-only">Products</h2>
+<CoffeeList/>
 
-        <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            <a v-for="product in products" :key="product.id" :href="product.href" class="group">
-                <div
-                    class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                    <img :src="product.imageSrc" :alt="product.imageAlt"
-                         class="h-full w-full object-cover object-center group-hover:opacity-75"/>
-                </div>
-                <h3 class="mt-4 text-sm text-gray-700">{{ product.name }}</h3>
-                <p class="mt-1 text-lg font-medium text-gray-900">{{ product.price }}</p>
-            </a>
-        </div>
-    </div>
-
-    <div class="container mx-auto bg-white py-8 border-t border-gray-400">
-        <div class="container flex px-3 py-8 ">
-            <div class="w-full mx-auto flex flex-wrap">
-                <div class="flex w-full lg:w-1/2 ">
-                    <div class="px-3 md:px-0">
-                        <h3 class="font-bold text-gray-900">About</h3>
-                        <p class="py-4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel mi ut felis tempus
-                            commodo nec id erat. Suspendisse consectetur dapibus velit ut lacinia.
-                        </p>
-                    </div>
-                </div>
-                <div class="flex w-full lg:w-1/2 lg:justify-end lg:text-right">
-                    <div class="px-3 md:px-0">
-                        <h3 class="font-bold text-gray-900">Social</h3>
-                        <ul class="list-reset items-center pt-3">
-                            <li>
-                                <a class="inline-block no-underline hover:text-black hover:underline py-1" href="#">Add
-                                    social links</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script setup lang="ts">
-const products = [
-    {
-        id: 1,
-        name: 'coffee',
-        href: '#',
-        price: '$48',
-        imageSrc: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/the-blend-whole-bean-250-s-595x595.png',
-        imageAlt: 'coffee',
-    },
-    {
-        id: 2,
-        name: 'coffee',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/gusto-whole-bean-250-s-595x595.png',
-        imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
-    },
-    {
-        id: 3,
-        name: 'coffee',
-        href: '#',
-        price: '$89',
-        imageSrc: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/gusto-whole-bean-250-s-595x595.png',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
-    },
-    {
-        id: 4,
-        name: 'coffee',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/soulmate-whole-bean-250-s-1-595x595.png',
-        imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-    },
-    {
-        id: 4,
-        name: 'coffee',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/brander1-eb-1kg.png',
-        imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-    },
-    {
-        id: 4,
-        name: 'coffee',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/brander1-eb-1kg.png',
-        imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-    },
-    {
-        id: 4,
-        name: 'coffee',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/brander1-eb-1kg.png',
-        imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-    },
-    {
-        id: 4,
-        name: 'coffee',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/brander1-eb-1kg.png',
-        imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-    },
-]
+import CoffeeList from "@/components/products/CoffeeList.vue";
+
 </script>

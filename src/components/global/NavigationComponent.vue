@@ -46,7 +46,3 @@ export default {
     name: "NavigationComponent"
 }
 </script>
-
-<style scoped>
-
-</style>
