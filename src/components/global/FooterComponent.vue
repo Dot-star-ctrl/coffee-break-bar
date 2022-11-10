@@ -6,8 +6,7 @@
                     <div class="px-3 md:px-0">
                         <h3 class="font-bold text-gray-900">About</h3>
                         <p class="py-4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel mi ut felis tempus
-                            commodo nec id erat. Suspendisse consectetur dapibus velit ut lacinia.
+                           Stijlbreuk coffee bar assignment. Built with Vue 3, TypeScript and TailwindCSS.
                         </p>
                     </div>
                 </div>
@@ -28,7 +27,5 @@
 </template>
 
 <script>
-export default {
-    name: "FooterComponent"
-}
+
 </script>

@@ -14,8 +14,8 @@
             <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
                 <nav>
                     <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0 text-xl">
-                        <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4" href="#">Menu</a>
-                        </li>
+                        <li><router-link to="/" class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Menu</router-link></li>
+                        <li><router-link to="/coffees/create" class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Create Coffee</router-link></li>
                     </ul>
                 </nav>
             </div>

@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CoffeeView from '../views/CoffeeView.vue'
+import CreateCoffeeView from '../views/CreateCoffeeView.vue'
 
 const routes = [
     {
@@ -13,6 +14,7 @@ const routes = [
         name: 'coffees',
         children: [
             {path: "/coffees/:id", name: "CoffeeView", component: CoffeeView},
+            {path: "/coffees/create", name: "CreateCoffee", component: CreateCoffeeView},
         ]
     }
 ]
