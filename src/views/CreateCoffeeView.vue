@@ -85,7 +85,7 @@
                     <div class="px-4 py-3 text-right sm:px-6">
                         <button type="submit"
                                 class="inline-flex justify-center text-gray-900 border-2 border-transparent border-gray-900 py-3 px-6 text-md font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7c4e29]">
-                            Create
+                            {{editMode ? 'Edit' : 'Create'}}
                         </button>
                     </div>
                 </div>
@@ -95,15 +95,18 @@
 </template>
 
 <script setup lang="ts">
-import {ref, reactive} from "vue";
+import {ref, reactive, onMounted} from "vue";
 import router from "@/router";
 import useVuelidate from '@vuelidate/core'
 import {required, email, sameAs, minLength, helpers} from '@vuelidate/validators'
 import type {Coffee} from '@/types/Coffee';
 import type {Alert} from '@/types/Alert';
 import {useCoffeeStore} from "@/stores/coffeeStore";
+import {useRoute} from "vue-router";
 
 const coffeeStore = useCoffeeStore();
+const route = useRoute();
+const editMode = ref(false);
 
 const coffee = reactive<Coffee>({
     id: '',
@@ -142,11 +145,23 @@ const rules = {
 
 const v$ = useVuelidate(rules, coffee);
 
+onMounted(() => {
+    if (route.path.includes('edit')) {
+        editMode.value = true;
+        Object.assign(coffee, coffeeStore.getCoffeeById(route.params.id as string));
+    }
+});
+
 const submitForm = async () => {
     const result = await v$.value.$validate();
     if (result) {
-        coffeeStore.createCoffee(coffee);
-        showAlert('success', 'Your coffee was created successfully.');
+        if(!editMode.value) {
+            coffeeStore.createCoffee(coffee);
+            showAlert('success', 'Your coffee was created successfully.');
+        } else {
+            coffeeStore.editCoffee(coffee);
+            showAlert('success', 'Your coffee was edited successfully.');
+        }
 
     } else {
         showAlert('error', 'Something went wrong, please check your input.');

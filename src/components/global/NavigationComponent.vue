@@ -14,15 +14,25 @@
             <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
                 <nav>
                     <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0 text-xl">
-                        <li><router-link to="/" class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Menu</router-link></li>
-                        <li><router-link to="/coffees/create" class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Create Coffee</router-link></li>
+                        <li>
+                            <router-link to="/"
+                                         class="inline-block no-underline hover:text-black hover:underline py-2 px-4">
+                                Menu
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/coffees/create"
+                                         class="inline-block no-underline hover:text-black hover:underline py-2 px-4">
+                                Create Coffee
+                            </router-link>
+                        </li>
                     </ul>
                 </nav>
             </div>
 
             <div class="order-1 md:order-2">
                 <a href="#">
-                    <img src="../../assets/images/logo.svg" alt="logo" class="h-12 w-30 mr-2">
+                    <img src="../../assets/images/logo.svg" alt="logo" class="h-12 w-30 lg:mr-24 md:mr-24">
                 </a>
             </div>
 

@@ -1,4 +1,3 @@
-import {ref, computed} from 'vue'
 import {defineStore} from 'pinia'
 import type {Coffee} from "@/types/Coffee";
 
@@ -59,13 +58,24 @@ export const useCoffeeStore = defineStore('coffeeStore', {
     }),
     actions: {
         createCoffee(coffee: Coffee) {
-            coffee.id = String(Date.now())
-            this.coffees.push(coffee)
-        }
+            if (coffee) {
+                coffee.id = String(Date.now())
+                this.coffees.push(coffee)
+            }
+        },
+        editCoffee(coffee: Coffee) {
+            if (coffee) {
+                const index = this.coffees.findIndex(c => c.id === coffee.id)
+                this.coffees[index] = coffee
+            }
+        },
     },
     getters: {
         getCoffees(state) {
             return state.coffees
+        },
+        getCoffeeById: (state) => (id: string) => {
+            return state.coffees.find(coffee => coffee.id === id)
         }
     },
 })

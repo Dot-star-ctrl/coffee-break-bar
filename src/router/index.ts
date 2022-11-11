@@ -15,6 +15,7 @@ const routes = [
         children: [
             {path: "/coffees/:id", name: "CoffeeView", component: CoffeeView},
             {path: "/coffees/create", name: "CreateCoffee", component: CreateCoffeeView},
+            {path: "/coffees/edit/:id", name: "EditCoffee", component: CreateCoffeeView},
         ]
     }
 ]
