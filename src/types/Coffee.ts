@@ -3,5 +3,6 @@ export interface Coffee {
     name: string,
     description: string,
     picture: string,
-    price: number
+    price: number,
+    isRemoved: boolean,
 }

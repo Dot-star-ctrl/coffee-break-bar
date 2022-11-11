@@ -1,6 +1,16 @@
 <template>
     <div class="max-w-screen-md px-4 py-8 mx-auto lg:gap-8 xl:gap-0 py-32 lg:grid-cols-12">
         <div class="mt-5 md:col-span-2 md:mt-0">
+            <div v-if="alert.show" role="alert">
+                <div
+                    :class="['border font-bold px-4 py-2', alert.type === 'success' ? 'bg-green-400 border-green-400 text-green-700' : 'bg-red-400 border-red-400 text-red-700']">
+                    {{ alert.type === 'success' ? 'Success' : 'Error' }}
+                </div>
+                <div
+                    :class="['border border-t-0 px-4 py-3',  alert.type === 'success' ? 'border-green-400 text-green-700' : 'border-red-400 text-red-700']">
+                    <p> {{ alert.message }}</p>
+                </div>
+            </div>
             <form @submit.prevent="submitForm">
                 <div class="sm:overflow-hidden sm:rounded-md">
                     <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
@@ -85,17 +95,29 @@
 </template>
 
 <script setup lang="ts">
-import {reactive, computed} from "vue";
+import {ref, reactive} from "vue";
+import router from "@/router";
 import useVuelidate from '@vuelidate/core'
 import {required, email, sameAs, minLength, helpers} from '@vuelidate/validators'
 import type {Coffee} from '@/types/Coffee';
+import type {Alert} from '@/types/Alert';
+import {useCoffeeStore} from "@/stores/coffeeStore";
+
+const coffeeStore = useCoffeeStore();
 
 const coffee = reactive<Coffee>({
     id: '',
     name: '',
     description: '',
     picture: '',
-    price: 0
+    price: 0,
+    isRemoved: false,
+});
+
+const alert = reactive<Alert>({
+    show: false,
+    message: '',
+    type: 'success'
 });
 
 const rules = {
@@ -105,8 +127,17 @@ const rules = {
         minLength: minLength(5),
         maxLength: helpers.withMessage('Max length is 400', (value: string) => value.length <= 400)
     },
-    picture: {required, url: helpers.regex('url', /^https?:\/\/.+\..+/)},
-    price: {required, min: helpers.withMessage('Price must be greater than €0.00', (value: number) => value > 0)}
+    picture: {
+        required, url: helpers.withMessage('Must be a valid url', (value: string) => {
+            try {
+                new URL(value);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        })
+    },
+    price: {required, min: helpers.withMessage('Price must be greater than €0.00', (value: number) => value > 0)},
 };
 
 const v$ = useVuelidate(rules, coffee);
@@ -114,9 +145,26 @@ const v$ = useVuelidate(rules, coffee);
 const submitForm = async () => {
     const result = await v$.value.$validate();
     if (result) {
-        console.log('Form is valid');
+        coffeeStore.createCoffee(coffee);
+        showAlert('success', 'Your coffee was created successfully.');
+
     } else {
-        console.log('Form is invalid');
+        showAlert('error', 'Something went wrong, please check your input.');
+    }
+}
+
+const showAlert = (type: 'success' | 'error', message: string) => {
+    if (type && message) {
+        alert.show = true;
+        alert.type = type;
+        alert.message = message;
+        setTimeout(() => {
+            if (alert.type === 'success') {
+                router.push('/');
+            }
+            alert.show = false;
+            alert.message = '';
+        }, 2000);
     }
 }
 </script>
