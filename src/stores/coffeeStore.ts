@@ -6,53 +6,46 @@ export const useCoffeeStore = defineStore('coffeeStore', {
         coffees: [
             {
                 id: '1',
-                name: 'black coffee',
+                name: 'Ethiopian coffee',
                 description: 'just black coffee',
                 picture: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/the-blend-whole-bean-250-s-595x595.png',
-                price: 48,
+                price: 23.29,
             },
             {
                 id: '2',
-                name: 'black coffee',
+                name: 'Gusto coffee',
                 description: 'just black coffee',
                 picture: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/the-blend-whole-bean-250-s-595x595.png',
                 price: 48,
             },
             {
                 id: '3',
-                name: 'black coffee',
+                name: 'Los Amigos coffee',
                 description: 'just black coffee',
                 picture: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/the-blend-whole-bean-250-s-595x595.png',
                 price: 48,
             },
             {
                 id: '4',
-                name: 'black coffee',
+                name: 'The Blend coffee',
                 description: 'just black coffee',
                 picture: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/brander1-eb-1kg.png',
                 price: 48,
             },
             {
                 id: '5',
-                name: 'black coffee',
+                name: 'Bombita coffee',
                 description: 'just black coffee',
-                picture: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/brander1-eb-1kg.png',
+                picture: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/bombita-whole-bean-250-s-1.png',
                 price: 48,
             },
             {
                 id: '6',
-                name: 'black coffee',
+                name: 'Decaf coffee',
                 description: 'just black coffee',
-                picture: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/brander1-eb-1kg.png',
+                picture: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/decaf-whole-bean-250-s-595x595.png',
                 price: 48,
-            },
-            {
-                id: '7',
-                name: 'black coffee',
-                description: 'just black coffee',
-                picture: 'https://107.wpcdnnode.com/bocca.nl/wp-content/uploads/brander1-eb-1kg.png',
-                price: 48,
-            },
+            }
         ] as Coffee[],
 
     }),
@@ -69,13 +62,31 @@ export const useCoffeeStore = defineStore('coffeeStore', {
                 this.coffees[index] = coffee
             }
         },
+        removeCoffee(id: string) {
+            const coffee = this.coffees.find(coffee => coffee.id === id)
+            if (coffee) {
+                coffee.isRemoved = true
+            }
+        },
+        restoreCoffee(id: string) {
+            const coffee = this.coffees.find(coffee => coffee.id === id)
+            if (coffee) {
+                coffee.isRemoved = false
+            }
+        }
     },
     getters: {
-        getCoffees(state) {
+        getAllCoffees(state) {
             return state.coffees
         },
         getCoffeeById: (state) => (id: string) => {
             return state.coffees.find(coffee => coffee.id === id)
+        },
+        getRemovedCoffees(state) {
+            return state.coffees.filter(coffee => coffee.isRemoved)
+        },
+        getActiveCoffees(state) {
+            return state.coffees.filter(coffee => !coffee.isRemoved)
         }
     },
 })
