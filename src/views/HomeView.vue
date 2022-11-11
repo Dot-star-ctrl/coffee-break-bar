@@ -16,10 +16,9 @@
             </div>
         </div>
     </section>
-<CoffeeList/>
+    <CoffeeList :is-active="true"/>
 </template>
 
 <script setup lang="ts">
 import CoffeeList from "@/components/products/CoffeeList.vue";
-
 </script>
