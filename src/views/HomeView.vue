@@ -16,9 +16,7 @@
             </div>
         </div>
     </section>
-
 <CoffeeList/>
-
 </template>
 
 <script setup lang="ts">
